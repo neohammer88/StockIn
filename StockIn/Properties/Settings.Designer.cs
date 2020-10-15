@@ -33,5 +33,16 @@ namespace StockIn.Properties {
                 return ((string)(this["sql2ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=BMSDC;Initial Catalog=STOCKLOCATOR;User ID=stocklocator;Password=BMS1" +
+            "234")]
+        public string STOCKLOCATORConnectionString {
+            get {
+                return ((string)(this["STOCKLOCATORConnectionString"]));
+            }
+        }
     }
 }

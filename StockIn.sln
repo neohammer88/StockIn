@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockIn", "StockIn\StockIn.csproj", "{E007FA8F-D1DC-49DA-AAE9-AA1A6269CE60}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockIn2", "StockIn\StockIn2.csproj", "{E007FA8F-D1DC-49DA-AAE9-AA1A6269CE60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

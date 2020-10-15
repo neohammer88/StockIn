@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* Title : BMS Stock program
+ * Version : 2.0
+ * Language : C#
+ * Programmer : Tom Rho
+ * Date : 27/09/2020
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +21,8 @@ namespace StockIn
     public partial class Save : Form
     {
 
-        string connStr = "Data Source=desktop-v7k5hei\\sqlexpress;Initial Catalog=sql2;Integrated Security=True";
+        //string connStr = "Data Source=desktop-v7k5hei\\sqlexpress;Initial Catalog=sql2;Integrated Security=True";
+        string connStr = "Data Source=BMSDC;Initial Catalog=STOCKLOCATOR;User=stocklocator; Password=BMS1234";
         //SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adapt;

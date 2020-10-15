@@ -63,6 +63,16 @@ namespace StockIn.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow1 {
+            get {
+                object obj = ResourceManager.GetObject("arrow1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap logo_2019_1 {
             get {
                 object obj = ResourceManager.GetObject("logo-2019-1", resourceCulture);

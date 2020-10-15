@@ -2,7 +2,7 @@
  * Version : 2.0
  * Language : C#
  * Programmer : Tom Rho
- * Date : 13/09/2020
+ * Date : 27/09/2020
  */
 
 
@@ -22,7 +22,8 @@ namespace StockIn
     public partial class Login : Form
     {
 
-        string connStr = "Data Source=desktop-v7k5hei\\sqlexpress;Initial Catalog=sql2;Integrated Security=True";
+        //string connStr = "Data Source=desktop-v7k5hei\\sqlexpress;Initial Catalog=sql2;Integrated Security=True";
+        string connStr = "Data Source=BMSDC;Initial Catalog=STOCKLOCATOR;User=stocklocator; Password=BMS1234";
         DataTable dt = new DataTable();
         SqlConnection conn;
         SqlDataAdapter adapt;

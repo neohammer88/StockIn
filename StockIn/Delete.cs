@@ -1,4 +1,11 @@
-﻿using System;
+﻿/* Title : BMS Stock program
+ * Version : 2.0
+ * Language : C#
+ * Programmer : Tom Rho
+ * Date : 27/09/2020
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +20,13 @@ namespace StockIn
 {
     public partial class Delete : Form
     {
-        string connStr = "Data Source=desktop-v7k5hei\\sqlexpress;Initial Catalog=sql2;Integrated Security=True";
-        //SqlConnection conn;
+        //string connStr = "Data Source=desktop-v7k5hei\\sqlexpress;Initial Catalog=sql2;Integrated Security=True";
+        string connStr = "Data Source=BMSDC;Initial Catalog=STOCKLOCATOR;User=stocklocator; Password=BMS1234";
+        SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adapt;
         SqlDataReader rd;
+        DataTable dt = new DataTable();
 
         struct Stock
         {
@@ -34,7 +43,12 @@ namespace StockIn
 
         private void Delete_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'sTOCKLOCATORDataSet.Stock' table. You can move, or remove it, as needed.
+            this.stockTableAdapter.Fill(this.sTOCKLOCATORDataSet.Stock);
+            // TODO: This line of code loads data into the 'sql2DataSet.Stock' table. You can move, or remove it, as needed.
+            //this.stockTableAdapter.Fill(this.masterDataSet.Stock);
             lblUser.Text = Main.user;
+            dataGridViewDelete.DataSource = dt;
 
             dtPickerDelete.Value = DateTime.Now;
             this.ActiveControl = txtBoxDeleteBMSNo;
@@ -49,7 +63,51 @@ namespace StockIn
         {
             if (e.KeyChar == '\r')
             {
+                if (string.IsNullOrEmpty(txtBoxDeleteBMSNo.Text))
+                {
+                    MessageBox.Show("Please Input BMS No.!", "ERROR", MessageBoxButtons.OK);
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        conn = new SqlConnection(connStr);
+                        string exist = "SELECT COUNT(*) FROM Stock WHERE BMSNo = '" + txtBoxDeleteBMSNo.Text + "'";
+                        SqlCommand cmd = new SqlCommand(exist, conn);
+                        conn.Open();
+                        int userExist = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                        //If the stock is in databse, show it to datagridview
+                        if (userExist > 0)
+                        {
+                            adapt = new SqlDataAdapter("select * from Stock where BMSNo = '" + txtBoxDeleteBMSNo.Text + "'", conn);
+
+                            adapt.Fill(dt);
+                            dataGridViewDelete.DataSource = dt;
+                            conn.Close();
+                        }
+                        //If the stock is not in database, show the error message
+                        else
+                        {
+                            //System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+                            //player.SoundLocation = @"C:\sample1.wav";
+                            //player.Load();
+                            //player.Play();
+                            MessageBox.Show(txtBoxDeleteBMSNo.Text + "\n is Not in DB!", "Warning", MessageBoxButtons.OK);
+                            return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        txtBoxDeleteBMSNo.Text = "";
+                        conn.Close();
+                    }
                 btnDelete_Click(sender, e);
+                }
             }
         }
 
@@ -88,63 +146,55 @@ namespace StockIn
             newStock.Location = txtBoxDeleteLocation.Text;
             newStock.User = lblUser.Text;
 
-            if (string.IsNullOrEmpty(txtBoxDeleteBMSNo.Text))
-            {
-                MessageBox.Show("Please Input BMS No.!", "ERROR", MessageBoxButtons.OK);
-                return;
-            }
-
-            try
-            {
-                string stateDelete = "Delete";
-                SqlConnection conn = new SqlConnection(connStr);
-                //Check the duplicate in database
-                SqlCommand exist = new SqlCommand("SELECT COUNT(*) FROM Stock WHERE ([BMSNo] = @bms)", conn);
-                exist.Parameters.AddWithValue("@bms", newStock.BMSNo);
-                conn.Open();
-                int stockExist = (int)exist.ExecuteScalar();
-                //if there is the duplicate in database, update information of each stock
-                if (stockExist > 0)
+            //if (string.IsNullOrEmpty(txtBoxDeleteBMSNo.Text))
+            //{
+            //    MessageBox.Show("Please Input BMS No.!", "ERROR", MessageBoxButtons.OK);
+            //    return;
+            //}
+            //else
+            //{
+                try
                 {
-                    //System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-                    //player.SoundLocation = @"C:\sample1.wav";
-                    //player.Load();
-                    //player.Play();
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO History (BMSNo, Location, Date, [User], State) VALUES (@bms, @location, getdate(), @user2, @state); DELETE FROM Stock WHERE BMSNo = '" + newStock.BMSNo + "'", conn))
+                    string stateDelete = "Delete";
+                    //Update location information of selected stocks
+                    foreach (DataGridViewRow row in dataGridViewDelete.Rows)
                     {
-                        cmd.Parameters.AddWithValue("@bms", newStock.BMSNo);
-                        cmd.Parameters.AddWithValue("@location", newStock.Location);
-                        cmd.Parameters.AddWithValue("@date", dtPickerDelete.Text.ToString());
-                        cmd.Parameters.AddWithValue("@user2", newStock.User);
-                        cmd.Parameters.AddWithValue("@state", stateDelete);
+                        using (SqlConnection conn2 = new SqlConnection(connStr))
+                        {
+                            conn2.Open();
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO History (BMSNo, Location, Date, [User], State) VALUES (@bms, @location, getdate(), @user2, @state); DELETE FROM Stock WHERE BMSNo = '" + row.Cells[0].Value.ToString() + "'", conn2))
+                            {
+                                cmd.Parameters.AddWithValue("@bms", row.Cells[0].Value);
+                                cmd.Parameters.AddWithValue("@location", row.Cells[1].Value);
+                                //cmd.Parameters.AddWithValue("@date", dtPickerDelete.Text.ToString());
+                                cmd.Parameters.AddWithValue("@user2", newStock.User);
+                                cmd.Parameters.AddWithValue("@state", stateDelete);
 
-                        cmd.ExecuteNonQuery();
-                        //dataGridView3.Rows.RemoveAt(row.Index);
-                        conn.Close();
+                                cmd.ExecuteNonQuery();
+                                dt.Clear();
+                                dataGridViewDelete.Refresh();
+                                conn2.Close();
+                            }
+                        }
                     }
-                    //txtBmsNo3.Text = "";
                 }
-
-                //if the stock is new, input it to database
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("No stocks in Database", "ERROR", MessageBoxButtons.OK);
+                    MessageBox.Show(ex.Message);
                 }
-                //}
-                //}
-                conn.Close();
-                //                MessageBox.Show("Save Success!", "SAVE", MessageBoxButtons.OK);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                txtBoxDeleteBMSNo.Text = "";
-                //datePicker3.Value = DateTime.Now;
-            }
+                finally
+                {
+                    txtBoxDeleteBMSNo.Text = "";
+                    //conn.Close();
+                    //datePicker3.Value = DateTime.Now;
+                }
+            //}
         }
 
+        private void btnDeleteAllStock_Click(object sender, EventArgs e)
+        {
+            Admin adminForm = new Admin();
+            adminForm.Show();
+        }
     }
 }

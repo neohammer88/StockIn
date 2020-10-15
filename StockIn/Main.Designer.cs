@@ -45,9 +45,9 @@
             // 
             // btnStock
             // 
-            this.btnStock.Location = new System.Drawing.Point(381, 101);
+            this.btnStock.Location = new System.Drawing.Point(387, 101);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(116, 38);
+            this.btnStock.Size = new System.Drawing.Size(137, 38);
             this.btnStock.TabIndex = 1;
             this.btnStock.Text = "STOCK_IN";
             this.btnStock.UseVisualStyleBackColor = true;
@@ -55,9 +55,9 @@
             // 
             // btnStockOut
             // 
-            this.btnStockOut.Location = new System.Drawing.Point(549, 101);
+            this.btnStockOut.Location = new System.Drawing.Point(555, 101);
             this.btnStockOut.Name = "btnStockOut";
-            this.btnStockOut.Size = new System.Drawing.Size(113, 38);
+            this.btnStockOut.Size = new System.Drawing.Size(134, 38);
             this.btnStockOut.TabIndex = 2;
             this.btnStockOut.Text = "STOCK_OUT";
             this.btnStockOut.UseVisualStyleBackColor = true;
@@ -65,54 +65,59 @@
             // 
             // btnMove
             // 
-            this.btnMove.Location = new System.Drawing.Point(381, 154);
+            this.btnMove.Location = new System.Drawing.Point(387, 154);
             this.btnMove.Name = "btnMove";
-            this.btnMove.Size = new System.Drawing.Size(116, 38);
+            this.btnMove.Size = new System.Drawing.Size(137, 38);
             this.btnMove.TabIndex = 3;
             this.btnMove.Text = "STOCK_MOVE";
             this.btnMove.UseVisualStyleBackColor = true;
+            this.btnMove.Click += new System.EventHandler(this.btnMove_Click);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(549, 154);
+            this.btnSearch.Location = new System.Drawing.Point(555, 154);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(113, 38);
+            this.btnSearch.Size = new System.Drawing.Size(134, 38);
             this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "STOCK_SEARCH";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnHistory
             // 
-            this.btnHistory.Location = new System.Drawing.Point(381, 209);
+            this.btnHistory.Location = new System.Drawing.Point(387, 209);
             this.btnHistory.Name = "btnHistory";
-            this.btnHistory.Size = new System.Drawing.Size(116, 38);
+            this.btnHistory.Size = new System.Drawing.Size(137, 38);
             this.btnHistory.TabIndex = 5;
             this.btnHistory.Text = "HISTORY";
             this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // btnExcel
             // 
-            this.btnExcel.Location = new System.Drawing.Point(381, 262);
+            this.btnExcel.Location = new System.Drawing.Point(387, 262);
             this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(116, 38);
+            this.btnExcel.Size = new System.Drawing.Size(137, 38);
             this.btnExcel.TabIndex = 7;
             this.btnExcel.Text = "EXCEL";
             this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
             // 
             // btnBulk
             // 
-            this.btnBulk.Location = new System.Drawing.Point(549, 209);
+            this.btnBulk.Location = new System.Drawing.Point(555, 209);
             this.btnBulk.Name = "btnBulk";
-            this.btnBulk.Size = new System.Drawing.Size(113, 38);
+            this.btnBulk.Size = new System.Drawing.Size(134, 38);
             this.btnBulk.TabIndex = 6;
             this.btnBulk.Text = "BULK_IN";
             this.btnBulk.UseVisualStyleBackColor = true;
+            this.btnBulk.Click += new System.EventHandler(this.btnBulk_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(549, 262);
+            this.btnExit.Location = new System.Drawing.Point(555, 262);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(113, 38);
+            this.btnExit.Size = new System.Drawing.Size(134, 38);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "EXIT";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -123,9 +128,9 @@
             this.lblUserName.AutoSize = true;
             this.lblUserName.Location = new System.Drawing.Point(60, 275);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(47, 12);
+            this.lblUserName.Size = new System.Drawing.Size(45, 12);
             this.lblUserName.TabIndex = 2;
-            this.lblUserName.Text = "Name :";
+            this.lblUserName.Text = "USER :";
             // 
             // lblUser
             // 
@@ -141,10 +146,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(38, 138);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 138);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Padding = new System.Windows.Forms.Padding(3);
-            this.pictureBox1.Size = new System.Drawing.Size(302, 109);
+            this.pictureBox1.Size = new System.Drawing.Size(311, 109);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
