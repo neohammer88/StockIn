@@ -55,7 +55,7 @@ namespace StockIn
                 //Show the updated location of stocks after moving
                 conn = new SqlConnection(connStr);
                 DataTable dt = new DataTable();
-                adapt = new SqlDataAdapter("select * from History where [Date] BETWEEN '" + dateTimePickerHistoryFrom.Value.Date.ToShortDateString() + "' AND '" +dateTimePickerHistoryTo.Value.Date.ToShortDateString() + "'", conn);
+                adapt = new SqlDataAdapter("select * from History where [Date] BETWEEN '" + dateTimePickerHistoryFrom.Value + "' AND '" +dateTimePickerHistoryTo.Value + "'", conn);
                 adapt.Fill(dt);
                 dataGridViewHistory.DataSource = dt;
                 conn.Close();
